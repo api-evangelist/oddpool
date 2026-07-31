@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: derived
+source: https://docs.oddpool.com
+standards:
+- id: oauth2
+  conforms: false
+  evidence: Auth is X-API-Key header only; no OAuth2 flows documented.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a custom {"detail": "..."} envelope, not application/problem+json.'
+- id: rfc6585-429
+  conforms: true
+  evidence: 429 responses carry a Retry-After header per rate-limits docs.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt served (404 on oddpool.com and api.oddpool.com).
+- id: json-api
+  conforms: false
+- id: idempotency
+  conforms: false
+  evidence: Read-only GET API; no idempotency-key contract documented.
+- id: pagination
+  conforms: true
+  evidence: List/search endpoints support filtering and incremental sync (classified_since).
+- id: websocket-streaming
+  conforms: true
+  evidence: Single WebSocket connection with subscribe/unsubscribe channel protocol.

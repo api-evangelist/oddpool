@@ -1,0 +1,56 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.oddpool.com/llms.txt
+docs: https://docs.oddpool.com
+authentication:
+  style: api-key-header
+  header: X-API-Key
+  ref: authentication/oddpool-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    The public API is read-only (all documented operations are HTTP GET), so no
+    idempotency-key contract is documented or required. No Idempotency-Key header
+    is defined.
+pagination:
+  style: parameter-based
+  note: >-
+    Search and listing endpoints (search/markets, search/events, recent listings,
+    reference-data list endpoints) support filtering and limiting. The reference
+    data /reference/v2/events and /reference/v2/entities endpoints page results
+    and support incremental sync (classified_since) for the events list.
+  known_params:
+  - classified_since
+  - series_id
+  - settled_after
+  - settled_before
+filtering:
+  note: >-
+    Full-text query plus structured filters: series_id substring matching,
+    settlement-time windows (settled_after/settled_before), venue and
+    venue_pair tags, and fungibility filters (fungible, allow, basis_class,
+    outcome_universe) on the reference data API.
+error_envelope:
+  format: custom-detail
+  field: detail
+  ref: errors/oddpool-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  retry_header: Retry-After
+  scheme: per-tier request/second + monthly quota
+  ref: https://docs.oddpool.com/rate-limits.md
+versioning:
+  scheme: uri-path
+  note: >-
+    The public API is unversioned in its base path (https://api.oddpool.com); the
+    enterprise Reference Data API is explicitly versioned at /reference/v2.
+  ref: lifecycle/oddpool-lifecycle.yml
+streaming:
+  transport: websocket
+  endpoint: wss://feeds.oddpool.com/ws
+  addressing: >-
+    Data addressed by what, not where. Subscribe to {channel_type}:{event_key}
+    (event-level: dist, snapshot) or {channel_type}:{event_key}:{outcome}
+    (per-outcome: book, trade). Both venues arrive on one channel, tagged by a
+    venue field.
+  ref: asyncapi/oddpool-feeds-asyncapi.yml

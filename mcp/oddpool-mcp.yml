@@ -1,0 +1,83 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: https://docs.oddpool.com/llms.txt
+note: >-
+  No official hosted/remote MCP server was found for Oddpool. This is a CANDIDATE
+  tool list derived one-to-one from the documented REST operations, provided as a
+  starting point for an agent-native surface. Every tool maps to a real HTTP GET
+  endpoint documented at docs.oddpool.com. Auth is the X-API-Key header.
+server:
+  name: oddpool
+  transport: http
+  url: null
+tools:
+- name: search_series
+  description: List Kalshi and Polymarket series, matching title or series_id substring.
+  source_operation: GET https://api.oddpool.com/search/series
+- name: search_markets
+  description: Find markets by full-text query, series_id, and settlement-time filters.
+  source_operation: GET https://api.oddpool.com/search/markets
+- name: search_events
+  description: Find events by full-text query and/or series_id.
+  source_operation: GET https://api.oddpool.com/search/events
+- name: recent_markets
+  description: Latest market listings without a search query.
+  source_operation: GET https://api.oddpool.com/search/recent/markets
+- name: recent_events
+  description: Latest event listings without a search query.
+  source_operation: GET https://api.oddpool.com/search/recent/events
+- name: event_markets
+  description: List all markets under one event.
+  source_operation: GET https://api.oddpool.com/search/events/{event_id}/markets
+- name: market_ohlcv
+  description: OHLCV bars for one to 50 markets in 6h/1d/1w/1m intervals.
+  source_operation: GET https://api.oddpool.com/markets/ohlcv
+- name: event_ohlcv
+  description: OHLCV bars for every outcome under one event.
+  source_operation: GET https://api.oddpool.com/events/{event_id}/ohlcv
+- name: kalshi_orderbook
+  description: Full historical Kalshi orderbook snapshots.
+  source_operation: GET https://api.oddpool.com/historical/kalshi/orderbook
+- name: kalshi_top_of_book
+  description: Historical Kalshi best-bid/ask/mid/spread timeseries.
+  source_operation: GET https://api.oddpool.com/historical/kalshi/top-of-book
+- name: kalshi_trades
+  description: Every trade execution on a Kalshi market.
+  source_operation: GET https://api.oddpool.com/historical/kalshi/trades
+- name: polymarket_orderbook
+  description: Full historical Polymarket orderbook snapshots.
+  source_operation: GET https://api.oddpool.com/historical/polymarket/orderbook
+- name: polymarket_top_of_book
+  description: Historical Polymarket best-bid/ask/mid/spread timeseries per token.
+  source_operation: GET https://api.oddpool.com/historical/polymarket/top-of-book
+- name: polymarket_trades
+  description: Trade executions on a Polymarket market.
+  source_operation: GET https://api.oddpool.com/historical/polymarket/trades
+- name: whale_list_events
+  description: List all events you are currently tracking (Pro).
+  source_operation: GET https://api.oddpool.com/whales/user/events
+- name: whale_feed
+  description: Whale trades for all your tracked events (Pro).
+  source_operation: GET https://api.oddpool.com/whales/user/feed
+- name: whale_stats
+  description: Aggregated statistics for all tracked events (Pro).
+  source_operation: GET https://api.oddpool.com/whales/user/stats
+- name: whale_event_trades
+  description: Whale trades for a specific event (Pro).
+  source_operation: GET https://api.oddpool.com/whales/user/event/{event_id}
+- name: whale_event_stats
+  description: Statistics for a specific event (Pro).
+  source_operation: GET https://api.oddpool.com/whales/user/event/{event_id}/stats
+- name: whale_market_trades
+  description: Whale trades for a specific market (Pro).
+  source_operation: GET https://api.oddpool.com/whales/user/market/{market_id}/trades
+- name: arbitrage_current
+  description: Find risk-free cross-venue arbitrage opportunities (Premium).
+  source_operation: GET https://api.oddpool.com/arbitrage/current
+- name: arbitrage_difference
+  description: Find where venues disagree on the same outcome's price (Premium).
+  source_operation: GET https://api.oddpool.com/arbitrage/current/difference
+- name: feeds_catalog
+  description: Discover every streamable event with venues, outcomes, and channel names.
+  source_operation: GET https://api.oddpool.com/feeds/catalog

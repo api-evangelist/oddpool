@@ -1,0 +1,91 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.oddpool.com/llms.txt
+docs: https://docs.oddpool.com/institutions/reference-data/oddpool-ids.md
+description: >-
+  Entity-relationship model for the Oddpool prediction-market data domain,
+  derived from the documented endpoints and the enterprise Reference Data ID
+  families. Retail entities (series, event, market, outcome, whale trade,
+  orderbook, OHLCV bar) are cross-venue-normalized; the enterprise reference
+  data layer nests four canonical Oddpool IDs.
+id_families:
+- id: OPI
+  entity: event
+  description: Oddpool ID for a matched cross-venue event.
+- id: OPO
+  entity: outcome
+  description: Oddpool ID for an outcome within an event.
+- id: OPL
+  entity: venue_listing
+  description: Oddpool ID for a venue-side listing (the tradable side on a venue).
+- id: OPE
+  entity: entity
+  description: Oddpool ID for a real-world entity, cross-walked to a Wikidata Q-ID.
+entities:
+- name: series
+  description: A Kalshi or Polymarket series (e.g. KXBTC15M, btc-up-or-down-15m).
+- name: event
+  description: A prediction-market event grouping outcomes; matched across venues.
+- name: market
+  description: A tradable market on a venue, belonging to an event.
+- name: outcome
+  description: A discrete outcome of an event, priced 0-1 as a probability.
+- name: venue
+  description: A trading venue — kalshi, polymarket, or polymarket_us.
+- name: orderbook_snapshot
+  description: Full YES/NO (or bid/ask) orderbook depth for a market at a point in time.
+- name: ohlcv_bar
+  description: Open/high/low/close probability + volume bar for a market or outcome.
+- name: trade
+  description: A single trade execution on a market.
+- name: whale_trade
+  description: A large trade (over threshold) tracked per event/market.
+- name: arbitrage_opportunity
+  description: A cross-venue risk-free pricing gap for the same outcome.
+- name: reference_entity
+  description: Canonical real-world entity with a Wikidata cross-walk (enterprise).
+relationships:
+- from: series
+  to: event
+  kind: has_many
+  via: series_id
+- from: event
+  to: market
+  kind: has_many
+  via: event_id
+- from: event
+  to: outcome
+  kind: has_many
+  via: event_key
+- from: market
+  to: outcome
+  kind: belongs_to
+  via: outcome
+- from: market
+  to: venue
+  kind: belongs_to
+  via: venue
+- from: market
+  to: orderbook_snapshot
+  kind: has_many
+  via: market_id
+- from: market
+  to: ohlcv_bar
+  kind: has_many
+  via: market_ids
+- from: market
+  to: trade
+  kind: has_many
+  via: market_id
+- from: event
+  to: whale_trade
+  kind: has_many
+  via: event_id
+- from: outcome
+  to: reference_entity
+  kind: belongs_to
+  via: OPE
+- from: event
+  to: reference_entity
+  kind: has_many
+  via: OPI

@@ -1,7 +1,31 @@
 aid: oddpool
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oddpool.png
 name: Oddpool
-description: Oddpool is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Oddpool is an institutional-grade data platform for prediction markets,
+  offering unified access to market data across Kalshi and Polymarket through a
+  single REST API and WebSocket feed. It describes itself as "the search engine
+  for prediction markets," normalizing hundreds of thousands of markets into a
+  common model so quant funds, trading desks, and prosumer traders can search
+  markets and events, pull tick-level historical orderbooks and OHLCV bars,
+  track whale trades, detect cross-venue arbitrage, and stream real-time
+  cross-venue probability distributions, orderbooks, and trades. Data is
+  addressed by what (event and outcome keys) rather than by venue-specific
+  tickers. A separate enterprise Reference Data API provides canonical
+  cross-venue identifiers, fungibility classification, and a Wikidata cross-walk
+  for institutional clients.
 url: https://raw.githubusercontent.com/api-evangelist/oddpool/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,12 +35,122 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Prediction Markets
+- Market Data
+- Financial Data
+- Trading
+- Fintech
+- Data Aggregation
+- WebSocket
+- Historical Data
+- Kalshi
+- Polymarket
+apis:
+- name: Oddpool API
+  description: >-
+    REST API for prediction market data across Kalshi and Polymarket: full-text
+    search over markets, events, and series; historical orderbook snapshots,
+    top-of-book timeseries, trades, and OHLCV bars; whale-trade tracking;
+    and cross-venue arbitrage and price-spread detection. Authenticated with an
+    X-API-Key header and gated by subscription tier.
+  humanURL: https://docs.oddpool.com
+  baseURL: https://api.oddpool.com
+  tags:
+  - Prediction Markets
+  - Market Data
+  - Historical Data
+  - Arbitrage
+  properties:
+  - type: Documentation
+    url: https://docs.oddpool.com
+  - type: APIReference
+    url: https://docs.oddpool.com/llms.txt
+  - type: GettingStarted
+    url: https://docs.oddpool.com/index.md
+  - type: Authentication
+    url: authentication/oddpool-authentication.yml
+  - type: RateLimits
+    url: https://docs.oddpool.com/rate-limits.md
+  - type: ErrorCatalog
+    url: errors/oddpool-problem-types.yml
+  - type: Conventions
+    url: conventions/oddpool-conventions.yml
+  - type: DataModel
+    url: data-model/oddpool-data-model.yml
+  - type: MCPServer
+    url: mcp/oddpool-mcp.yml
+- name: Oddpool WebSocket Feeds
+  description: >-
+    Single-connection WebSocket streaming real-time, normalized cross-venue
+    prediction market data (dist, book, trade, and snapshot channels) for macro
+    economic events and crypto (BTC/ETH) markets enriched with Binance
+    spot/futures reference data. Authenticated with an in-band auth message.
+  humanURL: https://docs.oddpool.com/websocket/overview.md
+  baseURL: wss://feeds.oddpool.com/ws
+  tags:
+  - WebSocket
+  - Streaming
+  - Real-time
+  properties:
+  - type: AsyncAPI
+    url: asyncapi/oddpool-feeds-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/oddpool-feeds-asyncapi.yml
+  - type: Documentation
+    url: https://docs.oddpool.com/websocket/overview.md
+common:
+- type: Website
+  url: https://www.oddpool.com
+- type: DeveloperPortal
+  url: https://docs.oddpool.com
+- type: Documentation
+  url: https://docs.oddpool.com
+- type: APIReference
+  url: https://docs.oddpool.com/llms.txt
+- type: GettingStarted
+  url: https://docs.oddpool.com/index.md
+- type: Pricing
+  url: https://oddpool.com/pricing
+- type: SignUp
+  url: https://oddpool.com/sign-in
+- type: TermsOfService
+  url: https://oddpool.com/terms
+- type: PrivacyPolicy
+  url: https://oddpool.com/privacy
+- type: Support
+  url: https://cal.com/team/oddpool/30-minute-meeting
+- type: LLMsTxt
+  url: llms/oddpool-llms.txt
+- type: Authentication
+  url: authentication/oddpool-authentication.yml
+- type: Conventions
+  url: conventions/oddpool-conventions.yml
+- type: ErrorCatalog
+  url: errors/oddpool-problem-types.yml
+- type: DataModel
+  url: data-model/oddpool-data-model.yml
+- type: Conformance
+  url: conformance/oddpool-conformance.yml
+- type: Lifecycle
+  url: lifecycle/oddpool-lifecycle.yml
+- type: MCPServer
+  url: mcp/oddpool-mcp.yml
+- type: AsyncAPI
+  url: asyncapi/oddpool-feeds-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/oddpool-feeds-asyncapi.yml
+- type: DomainSecurity
+  url: security/oddpool-domain-security.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

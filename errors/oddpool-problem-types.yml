@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.oddpool.com/errors.md
+format: custom-detail
+envelope:
+  field: detail
+  content_type: application/json
+  example: '{"detail": "Error message"}'
+  note: >-
+    Errors are NOT RFC 9457 problem+json. Every error returns a JSON body with a
+    single `detail` string field. Standard HTTP status codes indicate the class
+    of failure.
+problems:
+- status: 400
+  title: Bad request
+  detail: Invalid parameters
+  remediation: Check request parameters and query values against the endpoint docs.
+- status: 401
+  title: Unauthorized
+  detail: Invalid API key
+  remediation: Verify the X-API-Key header carries a valid, unexpired oddpool_ key.
+- status: 403
+  title: Forbidden
+  detail: No active subscription or insufficient tier
+  remediation: >-
+    Upgrade to the plan the endpoint group requires (Pro for whales, Premium for
+    arbitrage/price spreads, enterprise for reference data).
+- status: 404
+  title: Not found
+  detail: Resource does not exist
+  remediation: Confirm the market_id/event_id/opi/ope identifier exists.
+- status: 429
+  title: Rate limit exceeded
+  detail: Per-tier rate limit or monthly quota exceeded
+  remediation: >-
+    Read the Retry-After response header (seconds) and back off before retrying.
+- status: 500
+  title: Server error
+  detail: Internal server error
+  remediation: Retry with backoff; contact support if it persists.

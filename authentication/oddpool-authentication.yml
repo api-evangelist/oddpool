@@ -1,0 +1,35 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.oddpool.com/authentication.md
+docs: https://docs.oddpool.com/authentication.md
+summary:
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter_name: X-API-Key
+  key_prefix: oddpool_
+  description: >-
+    REST requests authenticate with an API key passed in the X-API-Key header.
+    Keys are generated from account settings (https://oddpool.com/account) and
+    are prefixed with `oddpool_`. Invalid or expired credentials return 401;
+    a valid key on an insufficient plan tier returns 403.
+  sources: [https://docs.oddpool.com/authentication.md]
+- name: WebSocketAuth
+  type: apiKey
+  in: message
+  parameter_name: api_key
+  description: >-
+    The WebSocket feed (wss://feeds.oddpool.com/ws) authenticates in-band: after
+    connecting, the client sends an auth message {"action":"auth","api_key":"..."}
+    and the server responds with the resolved tier and connection limits.
+  sources: [https://docs.oddpool.com/websocket/overview.md]
+tiers:
+  note: >-
+    Endpoint groups are gated by subscription plan, not by OAuth scopes. Search
+    and Historical data are Free; WebSocket dist channel is Free, book/trade/
+    snapshot are Pro+; Whale tracking is Pro; Arbitrage and Price spreads are
+    Premium; the Reference Data API is enterprise-only.

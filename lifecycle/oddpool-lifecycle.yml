@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.oddpool.com/llms.txt
+versioning:
+  scheme: uri-path
+  public_api:
+    base: https://api.oddpool.com
+    versioned: false
+    note: The public REST API base path is unversioned.
+  reference_data_api:
+    base_path: /reference/v2
+    current: v2
+    note: The enterprise Reference Data API is versioned at /reference/v2.
+deprecation:
+  policy_url: null
+  sunset_header: null
+  note: No deprecation policy or Sunset/Deprecation header support documented.
+sla:
+  url: null
+  uptime_target: null
+  note: No published SLA found.
+status_page:
+  url: null
+  note: No status page found (status.oddpool.com does not resolve).
+deprecated_operations: []
