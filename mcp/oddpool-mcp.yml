@@ -2,11 +2,9 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: https://docs.oddpool.com/llms.txt
-note: >-
-  No official hosted/remote MCP server was found for Oddpool. This is a CANDIDATE
-  tool list derived one-to-one from the documented REST operations, provided as a
-  starting point for an agent-native surface. Every tool maps to a real HTTP GET
-  endpoint documented at docs.oddpool.com. Auth is the X-API-Key header.
+note: No official hosted/remote MCP server was found for Oddpool. This is a CANDIDATE tool list derived
+  one-to-one from the documented REST operations, provided as a starting point for an agent-native surface.
+  Every tool maps to a real HTTP GET endpoint documented at docs.oddpool.com. Auth is the X-API-Key header.
 server:
   name: oddpool
   transport: http
@@ -81,3 +79,9 @@ tools:
 - name: feeds_catalog
   description: Discover every streamable event with venues, outcomes, and channel names.
   source_operation: GET https://api.oddpool.com/feeds/catalog
+deployment:
+  mode: none
+  verified: derived
+  tools: 23
+  checked: '2026-08-12'
+  source: catalog MCP census
