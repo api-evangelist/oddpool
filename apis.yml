@@ -93,6 +93,10 @@ apis:
   tags:
   - WebSocket
   - Streaming
+  - Real-Time
+  tags_raw:
+  - WebSocket
+  - Streaming
   - Real-time
   properties:
   - type: AsyncAPI
