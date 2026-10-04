@@ -60,6 +60,7 @@ tags:
 - Historical Data
 - Kalshi
 - Polymarket
+- Real-Time
 apis:
 - name: Oddpool API
   description: >-
